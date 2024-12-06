@@ -22,7 +22,7 @@
             alt="Profile Picture">
         </div>
         <h1 class="text-3xl font-extrabold">Alex Ayso</h1>
-        <p class="text-lg font-semibold">• SENIOR SOFTWARE ENGINEER • FULL STACK
+        <p class="text-lg font-semibold">SENIOR SOFTWARE ENGINEER • FULL STACK
           MOBILE DEVELOPER • FLUTTER DEVELOPER</p>
         <!-- <i class="fas fa-code fa-5x white"></i> -->
         <h2>Executive Summary</h2>
@@ -179,6 +179,11 @@
           telecommunication
           company. Here I was exposed in Android development, OSMDroid
           integrations, geolocation.</p>
+
+        <button id="download-btn">
+          <i class="fas fa-file-alt"></i>
+          Download as PDF
+        </button>
         <!-- 
         <h2></h2>
         <h3></h3>
@@ -215,5 +220,18 @@
         © 2024 Alex Ayso
       </div>
     </footer>
+    <script>
+      document.getElementById("download-btn").addEventListener("click", function () {
+        const element = document.getElementById("content");
+        const options = {
+          margin: 0.5,
+          filename: 'Alex_Ayso_Resume.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().set(options).from(element).save();
+      });
+    </script>
   </body>
 </html>
