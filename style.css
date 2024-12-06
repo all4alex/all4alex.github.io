@@ -72,8 +72,11 @@ a {
 }
 
 .section-1 h2 {
-    font-size: 1.7rem;
-    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.section-1 h3 {
+    font-size: 1.0rem;
 }
 
 .section-1 a {
@@ -88,8 +91,13 @@ a {
 }
 
 .section-2 h2 {
-    font-size: 1.7rem;
-    margin-bottom: 10px;
+    font-size: 1.3rem;
+
+}
+
+
+.section-2 h3 {
+    font-size: 1.0rem;
 }
 
 .section-2 p {
