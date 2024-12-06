@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: #101214;
+    background-color: #161A1D;
     color: #7A7C80;
 
 
@@ -154,4 +154,28 @@ a {
         width: 90%;
 
     }
+}
+
+footer {
+    background-color: #101214;
+    color: #7A7C80;
+    padding: 15px 20px;
+    text-align: center;
+    margin-top: 5rem;
+
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #7A7C80;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer .contact-line {
+    margin: 5px 0;
 }
