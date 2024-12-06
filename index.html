@@ -1,94 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Ayso Profile</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+      integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+      crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Your Name</title>
+  </head>
 
-<body class="bg-blue-600 text-white font-sans">
-    <div class="flex flex-col items-center p-8 space-y-8">
+  <body>
 
-        <!-- Profile Image -->
-        <div class="rounded-full w-36 h-36 bg-white overflow-hidden shadow-lg">
-            <img src="https://all4alex.github.io/profile-pic.jpg" alt="Profile Picture"
-                class="w-full h-full object-cover">
+    <div class="grid-2">
+
+      <div class="section-1">
+        <div class="profile-picture">
+          <img src="https://all4alex.github.io/black-white.png"
+            alt="Profile Picture">
         </div>
+        <h1 class="text-3xl font-extrabold">Alex Ayso</h1>
+        <p class="text-lg font-semibold">• SENIOR SOFTWARE ENGINEER FULL-STACK •
+          MOBILE DEVELOPER • FLUTTER DEVELOPER</p>
+        <!-- <i class="fas fa-code fa-5x white"></i> -->
+        <h2>Executive Summary</h2>
+        <p>Hi I'm Alex, 26 years of age. I'm a software engineer with 5 years of
+          experience. I specialized on mobile development and also knowledgeable
+          in backend development and dev ops. I am now loving Flutter for
+          building mobile applications and also web applications. And right now
+          I am actively exploring and integrating firebase and google cloud
+          services to my Flutter projects. I also had experience developing and
+          deploying API's. And done some CI/CD workflows. I am also very
+          interested on AI and machine learning and if I have spare time I
+          always read or watch any news related to it and also create personal
+          projects using or integrating AI . I am highly motivated and positive
+          person.</p>
+        <h2>Areas of Expertise</h2>
+        <div class="skills-list">
+          <h3>• Flutter development</h3>
+          <h3>• Android Studio (Java and Kotlin)</h3>
+          <h3>• Xcode</h3>
+          <h3>• Backend development (NodeJS)</h3>
+          <h3>• Google cloud functions</h3>
+          <h3>• REST API integrations</h3>
+          <h3>• Firebase setup and integrations</h3>
+          <h3>• AWS Cloud</h3>
+          <h3>• SQL and NoSQL database</h3>
+          <h3>• CI/CD</h3>
+          <h3>• Unit tests</h3>
+          <h3>• Playstore and Appstore distributions</h3>
 
-        <!-- Name and Title -->
-        <div class="text-center">
-            <h1 class="text-3xl font-extrabold">My name is Alex Ayso</h1>
-            <p class="text-lg font-semibold">Full Stack Flutter Developer</p>
-            <p class="mt-2 text-sm text-gray-300 tracking-wide">Hi I'm Alex, 26 years of age. I'm a software
-                engineer with 5 years of experience. I
-                specialized on mobile development and also
-                knowledgeable in backend development and
-                dev ops. I am now loving Flutter for building
-                mobile applications and also web applications.
-                And right now I am actively exploring and
-                integrating firebase and google cloud
-                services to my Flutter projects. I also had
-                experience developing and deploying API's.
-                And done some CI/CD workflows. I am also
-                very interested on AI and machine learning
-                and if I have spare time I always read or
-                watch any news related to it and also create
-                personal projects using or integrating AI . I
-                am highly motivated and positive person.</p>
-            <!--       <p class="text-xs mt-1">
-        Image by
-        <a href="https://www.freepik.com" class="text-blue-300 underline hover:text-blue-400">Freepik</a>
-      </p> -->
         </div>
+        <!-- <h2>Education</h2>
+          <h3>Bachelor Of Science In Information Technology</h3>
+          <h4>Arellano University</h4> -->
 
-        <!-- Services -->
-        <div class="grid grid-cols-2 gap-6 max-w-2xl">
-            <!-- Graphic Design -->
-            <div
-                class="bg-white text-blue-600 rounded-xl shadow-lg p-6 flex flex-col items-center space-y-4 transform transition hover:scale-105">
-                <div class="text-4xl">📐</div>
-                <h3 class="font-bold text-lg">RESUME</h3>
-                <a href="https://all4alex.github.io/my-resume.pdf" class="text-blue-500 font-medium text-sm underline">MORE</a>
-            </div>
+        <!-- <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a> -->
 
-            <!-- Web Design -->
-            <div
-                class="bg-white text-blue-600 rounded-xl shadow-lg p-6 flex flex-col items-center space-y-4 transform transition hover:scale-105">
-                <div class="text-4xl">💻</div>
-                <h3 class="font-bold text-lg">PORTFOLIO</h3>
-                <a href="https://all4alex.github.io/my-portfolio" class="text-blue-500 font-medium text-sm underline">MORE</a>
-            </div>
+        <h2>Education</h2>
+        <h3>Arellano University</h3>
+        <h3>June 2013 - April 2017 </h3>
+        <h3>Bachelor Of Science In Information Technology</h3>
 
-            <!-- Software -->
-            <div
-                class="bg-white text-blue-600 rounded-xl shadow-lg p-6 flex flex-col items-center space-y-4 transform transition hover:scale-105">
-                <div class="text-4xl">💾</div>
-                <h3 class="font-bold text-lg">SOFTWARE</h3>
-                <a href="#" class="text-blue-500 font-medium text-sm underline">MORE</a>
-            </div>
+      </div>
 
-            <!-- Application -->
-            <div
-                class="bg-white text-blue-600 rounded-xl shadow-lg p-6 flex flex-col items-center space-y-4 transform transition hover:scale-105">
-                <div class="text-4xl">📱</div>
-                <h3 class="font-bold text-lg">APPLICATION</h3>
-                <a href="#" class="text-blue-500 font-medium text-sm underline">MORE</a>
-            </div>
-        </div>
+      <div class="section-2">
+        <h1>Work Experience</h1>
 
-        <!-- Message -->
-        <p class="mt-8 text-center text-sm max-w-md">
-            If you are looking for a Flutter Developer. Please contact me.
-        </p>
+        <h2>FULLSTACK SOFTAWARE DEVELOPER</h2>
+        <h3> MekaSales Inc. - Metro Manila</h3>
+        <h3> Sept 11, 2023 - Present </h3>
+        <p>Lead the technical implementation of company’s projects. Created POC
+          for target clients. Involved in the entire development initiative.
+          From technology selections and implementation. Exposed in technologies
+          such as AWS Cloud integrations, Flutter, Firebase, NodeJs, React,
+          CI/CD pipelines.</p>
 
-        <!-- Button -->
-        <a href="#"
-            class="bg-white text-blue-600 font-bold py-3 px-6 rounded-full shadow-md hover:bg-gray-100 hover:shadow-lg transition">
-            SEND A MESSAGE
-        </a>
+        <h2>FULLSTACK SOFTAWARE DEVELOPER</h2>
+        <h3> MekaSales Inc. - Metro Manila</h3>
+        <h3> Sept 11, 2023 - Present </h3>
+        <p>Lead the technical implementation of company’s projects. Created POC
+          for target clients. Involved in the entire development initiative.
+          From technology selections and implementation. Exposed in technologies
+          such as AWS Cloud integrations, Flutter, Firebase, NodeJs, React,
+          CI/CD pipelines.</p>
+
+        <h2>FULLSTACK SOFTAWARE DEVELOPER</h2>
+        <h3> MekaSales Inc. - Metro Manila</h3>
+        <h3> Sept 11, 2023 - Present </h3>
+        <p>Lead the technical implementation of company’s projects. Created POC
+          for target clients. Involved in the entire development initiative.
+          From technology selections and implementation. Exposed in technologies
+          such as AWS Cloud integrations, Flutter, Firebase, NodeJs, React,
+          CI/CD pipelines.</p>
+        <!-- <h2>Projects</h2>
+        <a href="#">Project 1</a>
+        <a href="#">Project 2</a>
+        <a href="#">Project 3</a>
+        <a href="#">Project 4</a>
+        <a href="#">Project 5</a> -->
+        <h2>Contact</h2>
+        <p>WhatsApp/Mobile: 09761215840</p>
+        <p>alex.ayso04@gmail.com</p>
+        <!-- <p>alex.ayso@yahoo.com</p> -->
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
