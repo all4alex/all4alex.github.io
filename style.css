@@ -179,3 +179,38 @@ footer a:hover {
 footer .contact-line {
     margin: 5px 0;
 }
+
+#download-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #1f1f1f;
+    /* Dark background */
+    color: #FFF;
+    /* Orange text */
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid #7A7C80;
+    /* Orange border */
+    border-radius: 20px;
+    /* Rounded edges */
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+#download-btn:hover {
+    background-color: #FFF;
+    border: 1px solid #7A7C80;
+
+    /* Orange background */
+    color: #1f1f1f;
+    /* Dark text */
+}
+
+#download-btn i {
+    font-size: 18px;
+}
