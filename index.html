@@ -328,7 +328,7 @@
     document.getElementById('download-resume-btn').addEventListener('click', () => {
       // Replace with the URL to your resume PDF hosted in your repository
       const resumeUrl = 'https://all4alex.github.io/my-resume.pdf';
-      window.location.href = resumeUrl; // Redirect to the resume URL to trigger download
+      window.open(resumeUrl, '_blank'); // Redirect to the resume URL to trigger download
     });
 
     // Add event listener to the 'OPEN MY PORTFOLIO' button
