@@ -1,340 +1,863 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-    integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
-  <title>Alex Ayso Profile</title>
-  <style>
-    #content {
-      margin: 0;
-      padding: 0;
-      font-family: 'Roboto', sans-serif;
-      background-color: #161A1D;
-      color: #7A7C80;
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Alex Ayso | Senior Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #060a10;
+    --bg2: #0c1118;
+    --bg3: #111820;
+    --surface: #151d28;
+    --surface2: #1a2333;
+    --accent: #00e5a0;
+    --accent2: #00b4ff;
+    --accent3: #7c3aed;
+    --text: #e8f0fe;
+    --text2: #8ba4c0;
+    --text3: #4a6480;
+    --border: rgba(0,229,160,0.12);
+    --border2: rgba(0,180,255,0.15);
+    --glow: 0 0 24px rgba(0,229,160,0.18);
+    --glow2: 0 0 24px rgba(0,180,255,0.18);
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-display);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  ::selection { background: var(--accent); color: #000; }
+  a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+  a:hover { color: var(--accent2); }
 
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
-    }
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(6,10,16,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 clamp(1rem, 5vw, 4rem);
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+  .nav-logo span { color: var(--text2); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0; height: 1px;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); transition: all 0.3s; }
 
-    .btn {
-      margin-top: 2rem;
-      display: flex;
-      gap: 20px;
-      padding: 20px 30px;
-      background-color: #1f1f1f;
-      /* Dark background */
-      color: #fca311;
-      /* Orange text */
-      font-size: 16px;
-      font-weight: bold;
-      border: 1px solid #fca311;
-      /* Orange border */
-      border-radius: 20px;
-      /* Rounded edges */
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem) 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(0,229,160,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,160,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+  }
+  .hero-blob {
+    position: absolute; z-index: 0;
+    border-radius: 50%; filter: blur(80px); pointer-events: none;
+  }
+  .hero-blob-1 { width: 600px; height: 600px; top: -10%; right: -5%; background: radial-gradient(circle, rgba(0,229,160,0.08) 0%, transparent 70%); }
+  .hero-blob-2 { width: 400px; height: 400px; bottom: 0; left: 10%; background: radial-gradient(circle, rgba(0,180,255,0.06) 0%, transparent 70%); }
+  .hero-content { position: relative; z-index: 1; max-width: 780px; }
+  .hero-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    background: rgba(0,229,160,0.05);
+    animation: fadeSlideUp 0.6s ease both;
+  }
+  .hero-name {
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    animation: fadeSlideUp 0.6s 0.1s ease both;
+  }
+  .hero-name .line2 { display: block; }
+  .hero-name .accent-word {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-roles {
+    font-family: var(--font-mono);
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: var(--text2);
+    letter-spacing: 0.04em;
+    margin-bottom: 2rem;
+    min-height: 1.5em;
+    animation: fadeSlideUp 0.6s 0.2s ease both;
+  }
+  .cursor-blink {
+    display: inline-block;
+    width: 2px; height: 1em;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .hero-summary {
+    font-size: clamp(0.92rem, 1.5vw, 1.05rem);
+    color: var(--text2);
+    line-height: 1.8;
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    animation: fadeSlideUp 0.6s 0.3s ease both;
+    border-left: 2px solid var(--accent);
+    padding-left: 1.25rem;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeSlideUp 0.6s 0.4s ease both;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+    border: 1px solid var(--accent);
+  }
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--accent);
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--accent2);
+    border: 1px solid rgba(0,180,255,0.4);
+  }
+  .btn-secondary:hover {
+    background: rgba(0,180,255,0.06);
+    box-shadow: var(--glow2);
+    transform: translateY(-2px);
+    color: var(--accent2);
+  }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    animation: fadeSlideUp 0.6s 0.5s ease both;
+    flex-wrap: wrap;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+  }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-    .btn:hover {
-      background-color: #fca311;
-      /* Orange background */
-      color: #1f1f1f;
-      /* Dark text */
-    }
+  /* SECTION BASE */
+  section {
+    padding: 6rem clamp(1.5rem, 5vw, 4rem);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-header { margin-bottom: 3.5rem; }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 48px; height: 1px;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .highlight { color: var(--accent); }
+  .highlight2 { color: var(--accent2); }
 
-    .btn i {
-      font-size: 18px;
-    }
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,229,160,0.03) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .skill-card:hover { border-color: rgba(0,229,160,0.35); transform: translateY(-3px); box-shadow: var(--glow); }
+  .skill-card:hover::before { opacity: 1; }
+  .skill-icon {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    opacity: 0.7;
+  }
+  .skill-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+  .tag-green { background: rgba(0,229,160,0.1); color: var(--accent); border: 1px solid rgba(0,229,160,0.2); }
+  .tag-blue { background: rgba(0,180,255,0.1); color: var(--accent2); border: 1px solid rgba(0,180,255,0.2); }
+  .tag-purple { background: rgba(124,58,237,0.12); color: #a78bfa; border: 1px solid rgba(124,58,237,0.2); }
 
-    .btn.blue {
-      color: #9f7aea;
-      /* Blue text for portfolio button */
-      border-color: #9f7aea;
-      /* Blue border */
-    }
+  /* EXPERIENCE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 6px; top: 8px; bottom: 8px; width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    opacity: 0.3;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 1.5rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.5s ease;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-dot {
+    position: absolute; left: -2.25rem; top: 6px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--bg);
+    transition: all 0.3s;
+  }
+  .timeline-item:hover .timeline-dot { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+  .timeline-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem 1.75rem;
+    transition: all 0.3s;
+  }
+  .timeline-card:hover { border-color: rgba(0,229,160,0.3); transform: translateX(4px); }
+  .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .timeline-title { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+  .timeline-period {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    background: rgba(0,229,160,0.08);
+    padding: 3px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .timeline-company { font-size: 0.85rem; color: var(--accent2); margin-bottom: 0.75rem; font-weight: 600; }
+  .timeline-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.75; }
 
-    .btn.blue:hover {
-      background-color: #9f7aea;
-      /* Blue background */
-      color: #1f1f1f;
-      /* Dark text */
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  /* EDUCATION */
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 2rem;
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    max-width: 600px;
+    transition: all 0.3s;
+  }
+  .edu-card:hover { border-color: rgba(0,180,255,0.35); box-shadow: var(--glow2); transform: translateY(-3px); }
+  .edu-icon {
+    width: 48px; height: 48px;
+    background: rgba(0,180,255,0.1);
+    border: 1px solid rgba(0,180,255,0.2);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.4rem;
+  }
+  .edu-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.35rem; }
+  .edu-info .degree { font-size: 0.85rem; color: var(--text2); margin-bottom: 0.25rem; }
+  .edu-info .period { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent2); letter-spacing: 0.1em; }
 
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .contact-card:hover { border-color: rgba(0,229,160,0.35); transform: translateY(-3px); box-shadow: var(--glow); }
+  .contact-icon {
+    width: 44px; height: 44px;
+    background: rgba(0,229,160,0.1);
+    border: 1px solid rgba(0,229,160,0.2);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+  }
+  .contact-label { font-size: 0.7rem; color: var(--text3); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px; }
+  .contact-val { font-size: 0.9rem; color: var(--text); font-weight: 600; word-break: break-all; }
+
+  /* SOCIAL */
+  .social-row { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+  .social-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text2);
+    transition: all 0.3s;
+  }
+  .social-btn:hover { border-color: rgba(0,229,160,0.4); color: var(--accent); box-shadow: var(--glow); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+  }
+  footer span { color: var(--accent); }
+
+  /* DIVIDER */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ABOUT / Photo section */
+  .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-photo-wrap { position: relative; }
+  .about-photo-frame {
+    position: relative;
+    display: inline-block;
+  }
+  .about-photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    opacity: 0.3;
+    z-index: 0;
+  }
+  .about-photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border: 1px solid var(--accent2);
+    border-radius: 10px;
+    opacity: 0.1;
+    z-index: 0;
+  }
+  .about-photo {
+    width: 100%;
+    max-width: 340px;
+    border-radius: 6px;
+    display: block;
+    position: relative; z-index: 1;
+    filter: grayscale(20%);
+    transition: filter 0.4s;
+  }
+  .about-photo:hover { filter: grayscale(0%); }
+  .about-photo-badge {
+    position: absolute;
+    bottom: -16px; right: -16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    z-index: 2;
+    white-space: nowrap;
+  }
+  .about-text p { color: var(--text2); line-height: 1.85; margin-bottom: 1rem; font-size: 0.97rem; }
+
+  /* mobile nav */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: rgba(6,10,16,0.97); padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--border); }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+    .about-wrap { grid-template-columns: 1fr; }
+    .about-photo-wrap { display: flex; justify-content: center; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
 </head>
-
 <body>
 
-  <div class="grid-2" id="content">
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">alex<span>.ayso</span>()</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="menuBtn" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-    <div class="section-1">
-      <div class="profile-picture">
-        <img src="https://all4alex.github.io/black-white.png" alt="Profile Picture">
+<!-- HERO -->
+<section class="hero" style="max-width:100%; padding-top:8rem;">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">&#9679; Available for new opportunities</div>
+    <h1 class="hero-name">
+      Alex <span class="line2"><span class="accent-word">Ayso</span></span>
+    </h1>
+    <div class="hero-roles">
+      <span id="typewriter"></span><span class="cursor-blink"></span>
+    </div>
+    <p class="hero-summary">
+      Software engineer with 6+ years of experience specializing in mobile development.
+      I build high-quality mobile and web apps — Flutter is my primary framework.
+      Also hands-on with backend dev, DevOps, Firebase, and Google Cloud.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:alex.ayso04@gmail.com" class="btn btn-primary">&#9993; Get In Touch</a>
+      <a href="#experience" class="btn btn-secondary">View My Work &#8594;</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-num">6+</span><span class="stat-label">Years Exp.</span></div>
+      <div class="stat-item"><span class="stat-num">8+</span><span class="stat-label">Companies</span></div>
+      <div class="stat-item"><span class="stat-num">iOS &amp; Android</span><span class="stat-label">Platforms</span></div>
+      <div class="stat-item"><span class="stat-num">Full Stack</span><span class="stat-label">Capability</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-photo-wrap reveal">
+      <div class="about-photo-frame">
+        <img class="about-photo" src="https://all4alex.github.io/black-white.png" alt="Alex Ayso" onerror="this.style.display='none'; this.parentElement.style.minHeight='300px'; this.parentElement.style.background='var(--surface)'; this.parentElement.style.borderRadius='6px';"/>
+        <div class="about-photo-badge">&#9889; 6+ Years in Mobile Dev</div>
       </div>
-      <h1 class="text-3xl font-extrabold">Alex Ayso</h1>
-      <p class="text-lg font-semibold">SENIOR SOFTWARE ENGINEER • FULL STACK
-        MOBILE DEVELOPER • FLUTTER DEVELOPER</p>
-      <!-- <i class="fas fa-code fa-5x white"></i> -->
-      <h2>Executive Summary</h2>
-      <p>Hi, I’m Alex, a software engineer with over 6 years of experience specializing in mobile development. 
-        I build high-quality mobile and web applications, with Flutter as my primary framework of choice. 
-        I also have hands-on experience with backend development, DevOps, and API design, including building, deploying, 
-        and maintaining scalable services. Currently, I’m actively exploring and integrating Firebase and Google Cloud 
-        services into my Flutter projects, along with implementing CI/CD workflows. I’m a highly motivated, positive, 
-        and continuously learning engineer who enjoys solving real-world problems through clean and efficient code.</p>
-      <h2>Areas of Expertise</h2>
-      <div class="skills-list">
-        <h3>• Flutter development</h3>
-        <h3>• Android Studio (Java and Kotlin)</h3>
-        <h3>• Xcode</h3>
-        <h3>• Backend development (NodeJS)</h3>
-        <h3>• Google cloud functions</h3>
-        <h3>• REST API integrations</h3>
-        <h3>• Firebase setup and integrations</h3>
-        <h3>• AWS Cloud</h3>
-        <h3>• SQL and NoSQL database</h3>
-        <h3>• CI/CD</h3>
-        <h3>• Unit tests</h3>
-        <h3>• Playstore and Appstore distributions</h3>
-
+    </div>
+    <div class="about-text reveal">
+      <div class="section-header" style="margin-bottom:1.5rem;">
+        <div class="section-label">01 &mdash; About</div>
+        <h2 class="section-title">Building apps that <span class="highlight">matter</span></h2>
       </div>
-      <!-- <h2>Education</h2>
-          <h3>Bachelor Of Science In Information Technology</h3>
-          <h4>Arellano University</h4> -->
+      <p>Hi, I'm Alex &mdash; a senior software engineer based in the Philippines. Over 6 years, I've shipped production apps across iOS, Android, and web, working with startups and established companies from the US, Sweden, and the UK.</p>
+      <p>Flutter is my weapon of choice, but I'm equally comfortable on the backend with Node.js and cloud services. I've set up CI/CD pipelines, integrated Firebase from scratch, and led mobile teams through full product cycles.</p>
+      <p>I care about clean architecture, real-world performance, and products users actually enjoy using.</p>
+      <div class="social-row">
+        <a href="https://github.com/all4alex" class="social-btn" target="_blank">&#9670; GitHub</a>
+        <a href="https://www.linkedin.com/in/alex-ayso-34a67317a/" class="social-btn" target="_blank">&#9670; LinkedIn</a>
+        <a href="https://www.facebook.com/alex.ayso/" class="social-btn" target="_blank">&#9670; Facebook</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-github"></i></a> -->
+<div class="section-divider"></div>
 
-      <h2>Education</h2>
-      <h3>Arellano University</h3>
-      <h3>June 2013 - April 2017 </h3>
-      <h3>Bachelor Of Science In Information Technology</h3>
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-label">02 &mdash; Skills</div>
+    <h2 class="section-title">Areas of <span class="highlight">Expertise</span></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">// mobile</div>
+      <h3>Mobile Development</h3>
+      <div class="skill-tags">
+        <span class="tag tag-green">Flutter</span>
+        <span class="tag tag-green">Dart</span>
+        <span class="tag tag-green">Android Studio</span>
+        <span class="tag tag-blue">Java</span>
+        <span class="tag tag-blue">Kotlin</span>
+        <span class="tag tag-blue">Xcode</span>
+        <span class="tag tag-purple">Swift</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">// backend</div>
+      <h3>Backend &amp; APIs</h3>
+      <div class="skill-tags">
+        <span class="tag tag-green">Node.js</span>
+        <span class="tag tag-blue">REST APIs</span>
+        <span class="tag tag-blue">GraphQL</span>
+        <span class="tag tag-purple">Java Spring</span>
+        <span class="tag tag-green">Firebase Functions</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">// cloud</div>
+      <h3>Cloud &amp; DevOps</h3>
+      <div class="skill-tags">
+        <span class="tag tag-blue">Firebase</span>
+        <span class="tag tag-green">Google Cloud</span>
+        <span class="tag tag-purple">AWS</span>
+        <span class="tag tag-blue">Azure</span>
+        <span class="tag tag-green">CI/CD</span>
+        <span class="tag tag-purple">GitHub Actions</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">// data</div>
+      <h3>Database</h3>
+      <div class="skill-tags">
+        <span class="tag tag-green">Firestore</span>
+        <span class="tag tag-blue">Realtime DB</span>
+        <span class="tag tag-green">SQL</span>
+        <span class="tag tag-blue">NoSQL</span>
+        <span class="tag tag-purple">Firebase ML</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">// web</div>
+      <h3>Web &amp; Frontend</h3>
+      <div class="skill-tags">
+        <span class="tag tag-green">Flutter Web</span>
+        <span class="tag tag-blue">React</span>
+        <span class="tag tag-blue">HTML/CSS</span>
+        <span class="tag tag-purple">Firebase Hosting</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">// distribution</div>
+      <h3>App Distribution</h3>
+      <div class="skill-tags">
+        <span class="tag tag-green">Play Store</span>
+        <span class="tag tag-blue">App Store</span>
+        <span class="tag tag-blue">Unit Testing</span>
+        <span class="tag tag-purple">Firebase Distribution</span>
+      </div>
+    </div>
+  </div>
+</section>
 
+<div class="section-divider"></div>
 
-      <button id="download-resume-btn" class="btn">
-        <i class="fas fa-file-alt"></i>
-        DOWNLOAD RESUME
-      </button>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <div class="section-label">03 &mdash; Experience</div>
+    <h2 class="section-title">Work <span class="highlight">History</span></h2>
+  </div>
+  <div class="timeline">
 
-
-      <!-- My Portfolio Button -->
-      <button id="open-portfolio-btn" class="btn blue">
-        <i class="fas fa-terminal"></i>
-        OPEN MY PORTFOLIO
-      </button>
-
-
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-title">Full Stack Flutter Developer</div>
+          <div class="timeline-period">Oct 2025 &mdash; Present</div>
+        </div>
+        <div class="timeline-company">Utah Tech Labs &mdash; Utah, USA (Remote)</div>
+        <div class="timeline-desc">Translates Figma design mockups into responsive Flutter interfaces. Builds scalable cross-platform mobile apps, integrates backend APIs with robust error handling, and leverages AI-powered features to enhance user experience. Handles testing, performance optimization, and technical documentation.</div>
+      </div>
     </div>
 
-    <div class="section-2">
-      <h1>Work Experience</h1>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-title">Full Stack Flutter Developer</div>
+          <div class="timeline-period">Jun 2024 &mdash; Aug 2025</div>
+        </div>
+        <div class="timeline-company">Nostalgitrippen AB &mdash; Sweden (Remote)</div>
+        <div class="timeline-desc">Led development of <em>Nostalgia Words</em>, a nostalgic word trivia mobile game. Built interactive transitions, background music, sound effects, and animations. Integrated Firebase (Firestore, messaging, cloud functions) and AWS, with CI/CD pipelines via GitHub Actions and Firebase ML for in-app analytics.</div>
+      </div>
+    </div>
 
-      <h2>FULL STACK FLUTTER DEVELOPER</h2>
-      <h3>Utah Tech Labs - Utah (WFH)</h3>
-      <h3>Oct 2025 - Present </h3>
-      <p>At Utah Tech Labs, I was assigned a to developed and maintained 
-        cross-platform mobile applications by translating Figma 
-        design mockups into responsive, user-friendly interfaces. 
-        Built clean, efficient, and scalable code using Flutter and Swift, 
-        integrated complex backend APIs with robust error handling, and 
-        leveraged AI-powered solutions to enhance app functionality and user 
-        experience. Performed thorough testing, debugging, and performance optimization 
-        to ensure smooth interactions, while providing clear technical documentation 
-        and ongoing application support</p>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-title">Full Stack Flutter Developer (Freelance)</div>
+          <div class="timeline-period">Feb 2023 &mdash; Jun 2024</div>
+        </div>
+        <div class="timeline-company">Multiple Companies &mdash; UK &amp; USA (Remote)</div>
+        <div class="timeline-desc">Led technical implementation for multiple client projects. Created POCs for target clients and drove full development cycles — from technology selection to delivery. Built a social media app with event planning and built-in chat using Flutter, Firebase, and Google Cloud services.</div>
+      </div>
+    </div>
 
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-title">App Developer Lead</div>
+          <div class="timeline-period">Jun 2020 &mdash; Jan 2023</div>
+        </div>
+        <div class="timeline-company">CARKETA &mdash; Utah, USA (Remote)</div>
+        <div class="timeline-desc">Led app development for a US-based vehicle management company. Shipped <em>Carketa</em> (condition report app) and <em>Carketa Valuation Tool</em> (market pricing &amp; vehicle history). Stack included Flutter, Flutter Web, Firebase (Auth, Firestore, Realtime DB, Analytics, Storage, Hosting, ML), iOS &amp; Android distribution.</div>
+      </div>
+    </div>
 
-      <h2>FULL STACK FLUTTER DEVELOPER</h2>
-      <h3>Nostalgitrippen AB - Sweden (WFH)</h3>
-      <h3>June 2024 - August 2025 </h3>
-      <p>At Nostalgitrippen AB, I led the development of Nostalgia Words, a
-        nostalgic word trivia mobile game, where I played a key role in
-        building new features such as interactive transitions, background
-        music, sound effects, and animations. I integrated Firebase for
-        backend services, including Firestore, messaging, and cloud
-        functionalities, as well as AWS for additional cloud support. I also
-        implemented CI/CD pipelines for streamlined deployments and leveraged
-        Firebase's machine learning for in-app analytics. My work involved
-        technologies like Flutter, Firebase, AWS, and GitHub Actions,
-        delivering a seamless experience on both Android and iOS
-        platforms.</p>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-title">Mobile Developer</div>
+          <div class="timeline-period">Aug 2021 &mdash; Sep 2022</div>
+        </div>
+        <div class="timeline-company">SD Solutions &mdash; Ortigas (Remote)</div>
+        <div class="timeline-desc">Led mobile app development for multiple projects including an online food &amp; grocery delivery platform (rider + client apps). Introduced proper planning-to-distribution workflows and new tech standards. Stack: Flutter, Firebase (messaging, Firestore, hosting, cloud functions, analytics).</div>
+      </div>
+    </div>
 
-      <h2>FULL STACK FLUTTER DEVELOPER (Freelance)</h2>
-      <h3>Multiple Companies - UK, Utah (WFH)</h3>
-      <h3>Feb 2023 - June 2024</h3>
-      <p>Lead the technical implementation of company’s projects. Created POC
-        for target clients. Involved in the entire development initiative.
-        From technology selections and implementation. Exposed in technologies
-        such as AWS Cloud integrations, Flutter, Firebase, NodeJs, React,
-        CI/CD pipelines.</p>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-title">Software Engineer</div>
+          <div class="timeline-period">Feb 2020 &mdash; Sep 2021</div>
+        </div>
+        <div class="timeline-company">Stratpoint Technologies, Inc. &mdash; Mandaluyong</div>
+        <div class="timeline-desc">Developed internal project management app in Flutter. Led client projects including GlobeOne Flutter POC, GlobeOneX, TMX, and GOMO app. Technologies: Flutter, Firebase, GraphQL.</div>
+      </div>
+    </div>
 
-      <p>Created a social media app where users can create, invite and plan events. They can also communicate using built in chat features within the app. This is built using Flutter, Google cloud services and Firebase for backend.</p>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-title">Software Engineer</div>
+          <div class="timeline-period">Feb 2019 &mdash; Feb 2020</div>
+        </div>
+        <div class="timeline-company">IT Managers, Inc. &mdash; Makati</div>
+        <div class="timeline-desc">Outsourced to a bank to build a digital banking onboarding system. Developed an eKYC app with face liveness detection and ID verification. Technologies: Azure, AWS, CI/CD, Java Spring, Android (Java/Kotlin).</div>
+      </div>
+    </div>
 
-      <h2>MOBILE DEVELOPER</h2>
-      <h3>SD Solutions - Ortigas (WFH)</h3>
-      <h3>August 2021 - September 2022</h3>
-      <p>Lead the mobile app development team for multiple projects. Such as
-        online
-        food and grocery delivery app both for rider and client. This app is
-        basically
-        like grab or food panda. Exposed to technologies such as
-        Firebase(messaging,
-        firestore, hosting, cloud functions, analytics, distribution). Also
-        built small
-        projects for and revamps for existing projects. Introduced a proper
-        flow from
-        planning, development up to distributions and new technologies to the
-        team.</p>
-
-      <h2>APP DEVELOPER LEAD</h2>
-      <h3>CARKETA - Utah (WFH)</h3>
-      <h3>June 2020 - Jan 2023</h3>
-      <p>Lead the app development for a US based company. Developed and
-        deployed
-        apps such as Carketa a condition report app to help user and
-        dealership
-        manage inventory and track information about the vehicles and Carketa
-        valuation tool an app that help's the user evaluate a vehicle by
-        knowing their
-        market price, vehicle history and more. Here I was exposed in
-        technologies
-        like Flutter, Flutter web, Firebase (Auth, Firestore, Realtime db,
-        Analytics,
-        Storage, Hosting and machine learning), Appstore IOS app build and
-        deployment, Playstore app build and deployment.</p>
-
-      <h2>SOFTWARE ENGINEER</h2>
-      <h3>Stratpoint Technologies, Inc. - Mandaluyong</h3>
-      <h3>Feb 2020 - September 2021</h3>
-      <p>Developed a project management app an the internal project of the
-        company
-        using Flutter. Also involved and lead some of client projects such as
-        GlobeOne
-        Flutter POC, GlobeOneX, TMX, and GOMO app. Here I was exposed in
-        technologies like Flutter, Firebase, GraphQL.</p>
-
-      <h2>SOFTWARE ENGINEER</h2>
-      <h3>IT Managers, Inc. - Makati</h3>
-      <h3>Feb 2019 - Feb 2020</h3>
-      <p>Outsourced to a bank to help develop a digital bank onboarding.
-        Developed a
-        eKYC app that has a ability to scan face liveliness and id
-        verification. Here I
-        was exposed in technologies like Azure and AWS cloud, CI/CD setup,
-        backend
-        develpment using Java Spring framework, Android development
-        JAVA/Kotlin.</p>
-
-      <h2>APP DEVELOPER</h2>
-      <h3>PACIFIC DATA RESOURCES, INC. - Makati</h3>
-      <h3>Sep 2017 - Jan 2019</h3>
-      <p>Developed native GIS mobile survey application for a
-        telecommunication
-        company. Here I was exposed in Android development, OSMDroid
-        integrations, geolocation.</p>
-
-
-      <!-- 
-        <h2></h2>
-        <h3></h3>
-        <h3></h3>
-        <p></p> -->
-      <!-- <h2>Projects</h2>
-        <a href="#">Project 1</a>
-        <a href="#">Project 2</a>
-        <a href="#">Project 3</a>
-        <a href="#">Project 4</a>
-        <a href="#">Project 5</a> -->
-
-      <!-- <p>alex.ayso@yahoo.com</p> -->
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-title">App Developer</div>
+          <div class="timeline-period">Sep 2017 &mdash; Jan 2019</div>
+        </div>
+        <div class="timeline-company">Pacific Data Resources, Inc. &mdash; Makati</div>
+        <div class="timeline-desc">Developed a native GIS mobile survey application for a telecommunications company. Worked with Android development, OSMDroid integrations, and geolocation features.</div>
+      </div>
     </div>
 
   </div>
+</section>
 
+<div class="section-divider"></div>
 
-  <footer>
-    <h3>Reach me at:</h3>
-    <div class="contact-line">
-      Phone: +639760378032
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <div class="section-label">04 &mdash; Education</div>
+    <h2 class="section-title">Academic <span class="highlight2">Background</span></h2>
+  </div>
+  <div class="edu-card reveal">
+    <div class="edu-icon">&#127979;</div>
+    <div class="edu-info">
+      <h3>Arellano University</h3>
+      <div class="degree">Bachelor of Science in Information Technology</div>
+      <div class="period">June 2013 &mdash; April 2017</div>
     </div>
-        <div class="contact-line">
-      WhatsApp: +639760378032
-    </div>
-    <div class="contact-line">
-      Email:
-      <a href="mailto:alex.ayso04@gmail.com">alex.ayso04@gmail.com</a>,
-      <a href="mailto:alex.ayso@yahoo.com">alex.ayso@yahoo.com</a>
-    </div>
-    <div class="contact-line">
-      <a href="https://github.com/all4alex" target="_blank">GitHub</a> |
-      <a href="https://www.linkedin.com/in/alex-ayso-34a67317a/" target="_blank">LinkedIn</a> |
-      <a href="https://www.facebook.com/alex.ayso/" target="_blank">Facebook</a>
-    </div>
-    <div class="contact-line">
-      © 2026 Alex Ayso
-    </div>
-  </footer>
-  <script>
-    // document.getElementById("download-btn").addEventListener("click", function () {
-    //   const element = document.getElementById("content");
+  </div>
+</section>
 
-    //   // Calculate the dimensions of the content
-    //   const contentWidth = element.offsetWidth;
-    //   const contentHeight = element.offsetHeight;
+<div class="section-divider"></div>
 
-    //   // Define PDF dimensions (in points)
-    //   const pdfWidth = 595.28; // A4 width in points
-    //   const pdfHeight = 841.89; // A4 height in points
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <div class="section-label">05 &mdash; Contact</div>
+    <h2 class="section-title">Let's <span class="highlight">Connect</span></h2>
+  </div>
+  <div class="contact-grid reveal">
+    <a href="mailto:alex.ayso04@gmail.com" class="contact-card">
+      <div class="contact-icon">&#9993;</div>
+      <div><div class="contact-label">Email</div><div class="contact-val">alex.ayso04@gmail.com</div></div>
+    </a>
+    <a href="mailto:alex.ayso@yahoo.com" class="contact-card">
+      <div class="contact-icon">&#9993;</div>
+      <div><div class="contact-label">Email (Alt)</div><div class="contact-val">alex.ayso@yahoo.com</div></div>
+    </a>
+    <a href="tel:+639760378032" class="contact-card">
+      <div class="contact-icon">&#9742;</div>
+      <div><div class="contact-label">Phone / WhatsApp</div><div class="contact-val">+63 976 037 8032</div></div>
+    </a>
+    <a href="https://github.com/all4alex" target="_blank" class="contact-card">
+      <div class="contact-icon">&#9670;</div>
+      <div><div class="contact-label">GitHub</div><div class="contact-val">github.com/all4alex</div></div>
+    </a>
+  </div>
+  <div class="social-row reveal">
+    <a href="https://github.com/all4alex" class="social-btn" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/alex-ayso-34a67317a/" class="social-btn" target="_blank">LinkedIn</a>
+    <a href="https://www.facebook.com/alex.ayso/" class="social-btn" target="_blank">Facebook</a>
+    <a href="https://wa.me/639760378032" class="social-btn" target="_blank">WhatsApp</a>
+  </div>
+</section>
 
-    //   // Calculate scale ratio to fit content inside the PDF
-    //   const scaleFactor = Math.min(pdfWidth / contentWidth, pdfHeight / contentHeight);
+<footer>
+  <p>Designed &amp; Built by <span>Alex Ayso</span> &mdash; &copy; 2026 All rights reserved.</p>
+</footer>
 
-    //   // Adjust canvas dimensions for scaling
-    //   const adjustedWidth = contentWidth * scaleFactor;
-    //   const adjustedHeight = contentHeight * scaleFactor;
+<script>
+// Mobile nav
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-    //   const options = {
-    //     margin: 0, // No margin
-    //     filename: 'Scaled_Page.pdf',
-    //     image: { type: 'jpeg', quality: 0.98 },
-    //     html2canvas: {
-    //       scale: 2, // Higher scale for better quality
-    //       width: adjustedWidth,
-    //       height: adjustedHeight,
-    //       useCORS: true, // Ensure external resources are fetched
-    //     },
-    //     jsPDF: {
-    //       unit: 'pt', // Use points for measurement
-    //       format: [adjustedWidth, adjustedHeight], // Dynamically set format
-    //       orientation: 'portrait',
-    //     },
-    //   };
+// Typewriter
+const roles = [
+  'Senior Software Engineer',
+  'Full Stack Developer',
+  'Flutter Developer',
+  'Mobile App Architect',
+  'Backend Developer'
+];
+let ri = 0, ci = 0, deleting = false;
+const tw = document.getElementById('typewriter');
+function type() {
+  const role = roles[ri];
+  if (!deleting) {
+    tw.textContent = role.slice(0, ++ci);
+    if (ci === role.length) { deleting = true; setTimeout(type, 2000); return; }
+  } else {
+    tw.textContent = role.slice(0, --ci);
+    if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+  }
+  setTimeout(type, deleting ? 50 : 95);
+}
+type();
 
-    //   // Generate and save the PDF
-    //   html2pdf().set(options).from(element).save();
-    // });
-
-
-    // Add event listener to the 'DOWNLOAD RESUME' button
-    document.getElementById('download-resume-btn').addEventListener('click', () => {
-      // Replace with the URL to your resume PDF hosted in your repository
-      const resumeUrl = 'https://all4alex.github.io/my-resume.pdf';
-      window.open(resumeUrl, '_blank'); // Redirect to the resume URL to trigger download
-    });
-
-    // Add event listener to the 'OPEN MY PORTFOLIO' button
-    document.getElementById('open-portfolio-btn').addEventListener('click', () => {
-      // Replace with the URL to your portfolio.md file hosted in your repository
-      const portfolioUrl = 'https://all4alex.github.io/my-portfolio';
-      window.open(portfolioUrl, '_blank'); // Open portfolio in a new tab
-    });
-  </script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
+</script>
 </body>
-
 </html>
